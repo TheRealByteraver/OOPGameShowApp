@@ -19,6 +19,22 @@ qwertyDiv.addEventListener('click', event => {
     }    
 });
 
+window.addEventListener('keyup', (event) => {
+    // handle the keyup event only if a game is running
+    const overlayDiv = document.getElementById('overlay');
+    if(overlayDiv.style.display === 'none') {
+        game.handleInteraction(event.key);
+    } 
+    // start the game if the user pressed space or enter
+    else {
+        console.log(event.code);
+        if( event.code === 'Enter' || 
+            event.code === 'Space' || 
+            event.code === 'NumpadEnter') {
+            game.startGame();
+        }
+    }
+});
 
 
 

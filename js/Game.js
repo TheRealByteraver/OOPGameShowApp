@@ -8,23 +8,25 @@
 class Game {
     constructor() {
         // count the number of times the player choose a letter that is not 
-        // present in the phrase. When missed reaches five, the player looses
-        // the game.
+        // present in the phrase. When 'missed' reaches five, the player 
+        // looses the game.
         this.missed = 0;
 
-        // We count the amount of lives by counting the li elements in the 
-        // scoreboard, as this is more flexible than harcoding '5' in the
-        // javascript code everywhere.
+        // We count the initial amount of lives by counting the li elements
+        // in the #scoreboard id <div> in the html file. This way the amount 
+        // of lives can be changed in the html file without requiring a 
+        // change in the javascript code.
         this.maxLives = document.querySelectorAll('.tries').length;
 
         // Some phrases the Game Show App will randomly choose from. Add as
-        // many phrases as you want.
+        // many phrases as you want. The theme this time is Tarantino
+        // movie titles :)
         this.phrases = [
-            'If you automate a mess you get an automated mess',
-            'If you have a procedure with ten parameters you probably missed some',
-            'Simplicity carried to the extreme becomes elegance',
-            'The best way to predict the future is to implement it',
-            'The computer was born to solve problems that did not exist before'
+            'Reservoir dogs',
+            'Pulp fiction',
+            'The hateful eight',
+            ' Once Upon a Time In Hollywood',
+            'Django Unchained'
         ]; 
         // 'activePhrase' holds an instantiated object of the 'Phrase' class.
         this.activePhrase = null;
@@ -85,7 +87,11 @@ class Game {
         const keyrowButtons = document.querySelectorAll('#qwerty button');
         for(let i = 0; i < keyrowButtons.length; i++) {
             const button = keyrowButtons[i];
-            if(button.innerText === letter) {
+
+            // We use the button enabled/ disabled state to check if the 
+            // letter was played before. This way a player can't accidentally
+            // play the same letter twice using the keyboard
+            if(button.innerText === letter && !button.disabled) {
                 button.disabled = true;  
                 if(phraseHasLetter) {
                     button.className = 'chosen';
@@ -121,6 +127,7 @@ class Game {
         for(let i = livesLeft; i < lis.length; i++) {
             lis[i].firstElementChild.setAttribute('src', 'images/lostHeart.png');
         }
+        
         // End the game if all lives are consumed
         if(this.missed >= this.maxLives) {
             this.gameOver();
@@ -141,7 +148,7 @@ class Game {
 
     // This method displays the original start screen overlay, and depending
     // on the outcome of the game, updates the overlay h1 element with a 
-    // friendly win or loss message.    
+    // win or loss message.    
     gameOver() {
         const overlayDiv = document.getElementById('overlay');
         overlayDiv.style.display = '';
