@@ -2,29 +2,19 @@
  * Project 4 - OOP Game App
  * Game.js */
 
-// Game.js to create a Game class with methods for starting and ending the 
-// game, handling interactions, getting a random phrase, checking for a 
-// win, and removing a life from the scoreboard.
+// The Game class has methods for starting and ending the game, handling 
+// interactions, getting a random phrase, checking for a win, and removing
+// a life from the scoreboard.
 class Game {
-    // The class should include a constructor that initializes the following 
-    // properties:
-    //     - missed: used to track the number of missed guesses by the player. 
-    //     The initial value is 0, since no guesses have been made at the 
-    //     start of the game.
-    //     - phrases: an array of five Phrase objects to use with the game. 
-    //     A phrase should only include letters and spaces— no numbers, 
-    //     punctuation or other special characters.
-    //     - activePhrase: This is the Phrase object that’s currently in play.
-    //     The initial value is null. Within the startGame() method, this 
-    //     property will be set to the Phrase object returned from a call to 
-    //     the getRandomPhrase() method.    
-
     constructor() {
         // count the number of times the player choose a letter that is not 
         // present in the phrase. When missed reaches five, the player looses
         // the game.
         this.missed = 0;
 
+        // We count the amount of lives by counting the li elements in the 
+        // scoreboard, as this is more flexible than harcoding '5' in the
+        // javascript code everywhere.
         this.maxLives = document.querySelectorAll('.tries').length;
 
         // Some phrases the Game Show App will randomly choose from. Add as
@@ -40,18 +30,40 @@ class Game {
         this.activePhrase = null;
     }
 
-    // Hides the start screen overlay, calls the getRandomPhrase() method, 
-    // and sets the activePhrase property with the chosen phrase. It also 
-    // adds that phrase to the board by calling the addPhraseToDisplay() 
-    // method on the active Phrase object.    
-    startGame() { // OK
+    // startGame() cleans up the class' variables and resets the html to its
+    // initial state.
+    // Then it chooses randomly a new sentence from the array of available
+    // phrases and puts it on the screen.  
+    startGame() { 
+        // Remove all li elements from the Phrase ul element.
+        document.getElementById('phrase').firstElementChild.innerHTML = '';
+
+        // Enable all of the onscreen keyboard buttons again
+        const keyrowButtons = document.querySelectorAll('#qwerty button');
+        for(let i = 0; i < keyrowButtons.length; i++) {
+            const button = keyrowButtons[i];
+            button.disabled = false; 
+            button.className = 'key';
+        }
+
+        // reset the number of player misses to zero
+        this.missed = 0;
+
+        // Reset all of the heart images (i.e. the player's lives) in the scoreboard 
+        // at the bottom of the gameboard to display the liveHeart.png image.
+        const lis = document.getElementsByClassName('tries');
+        for(let i = 0; i < this.maxLives; i++) {
+            lis[i].firstElementChild.setAttribute('src', 'images/liveHeart.png');
+        }
+
+        // choose a new phrase and put it on the screen
+        this.activePhrase = new Phrase(this.getRandomPhrase()); 
+        this.activePhrase.addPhraseToDisplay();
+
+        // remove the overlay with the "Start Game" button
         const overlayDiv = document.getElementById('overlay');
         overlayDiv.style.display = 'none';
-
-        this.activePhrase = new Phrase(this.getRandomPhrase()); 
-
-        this.activePhrase.addPhraseToDisplay();
-    }
+}
 
     // This method randomly retrieves one of the phrases stored in the 
     // 'phrases' array and returns it.
@@ -76,7 +88,7 @@ class Game {
             if(button.innerText === letter) {
                 button.disabled = true;  
                 if(phraseHasLetter) {
-                    button.classList.add('chosen');
+                    button.className = 'chosen';
                     this.activePhrase.showMatchedLetter(letter);
                     const playerHasWon = this.checkForWin();
                     if(playerHasWon) {
@@ -84,7 +96,7 @@ class Game {
                     }
                 } 
                 else {
-                    button.classList.add('wrong');
+                    button.className = 'wrong';
                     this.removeLife();
                 }                
                 break;  
@@ -120,7 +132,6 @@ class Game {
     checkForWin() {
         const lis = document.getElementById('phrase').firstElementChild.children;
         for(let i = 0; i < lis.length; i++) {
-            console.log(lis[i].classList);
             if(lis[i].classList.contains('hide')) {
                 return false;
             }            
