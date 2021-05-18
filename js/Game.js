@@ -25,17 +25,16 @@ class Game {
             'Reservoir dogs',
             'Pulp fiction',
             'The hateful eight',
-            ' Once Upon a Time In Hollywood',
+            'Once Upon a Time In Hollywood',
             'Django Unchained'
         ]; 
         // 'activePhrase' holds an instantiated object of the 'Phrase' class.
         this.activePhrase = null;
     }
 
-    // startGame() cleans up the class' variables and resets the html to its
-    // initial state.
-    // Then it chooses randomly a new sentence from the array of available
-    // phrases and puts it on the screen.  
+    // This method cleans up the class' variables and resets the html to its
+    // initial state. Then it chooses randomly a new sentence from the array 
+    // of available phrases and puts it on the screen.
     startGame() { 
         // Remove all li elements from the Phrase ul element.
         document.getElementById('phrase').firstElementChild.innerHTML = '';
@@ -154,15 +153,16 @@ class Game {
         overlayDiv.style.display = '';
         const gameOverMessageH1 = document.getElementById('game-over-message');
 
-        overlayDiv.classList.remove('start');
+        overlayDiv.className = '';
+        console.log('overlay classlist: ', overlayDiv.classList);
         const playerHasWon = this.missed < this.maxLives;
         if(playerHasWon) {
             gameOverMessageH1.innerText = 'You won the game!';
-            overlayDiv.classList.add('win');
+            overlayDiv.className = 'win';
         }
         else {
             gameOverMessageH1.innerText = 'You lost, better luck next time!';
-            overlayDiv.classList.add('lose');
+            overlayDiv.className = 'lose';
         }
     }
 }
