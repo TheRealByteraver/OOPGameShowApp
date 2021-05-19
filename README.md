@@ -6,3 +6,4 @@ HTML / CSS / JavaScript
 A few rules were added at the bottom of css/styles.css to accomplish the following:
 - an outline on the keyboard buttons that are still clickable (i.e. the player didn't click on them before)
 - a shadow was added to the in-game title "Phrase Hunter"
+- a fade in animation is added at the end of the game, whether the player won the game or not

@@ -214,3 +214,15 @@ button[class="key"]:not(.chosen):not(.wrong):hover {
   color: #4ac0d5;
   text-shadow: 0 0 8px #4ac0d5;
 }
+
+.lose {
+    animation: fadebackground 4s;
+}
+
+.win {
+  animation: fadebackground 4s;
+}
+
+@keyframes fadebackground {
+  from {background-color: #fff;}
+}

@@ -35,6 +35,3 @@ window.addEventListener('keyup', (event) => {
         }
     }
 });
-
-
-
