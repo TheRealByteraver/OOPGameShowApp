@@ -202,3 +202,15 @@ button {
 .lose a {
   color: var(--color-lose);
 }
+
+/* From here on the CSS has been added for exceeds #2: */
+button[class="key"]:not(.chosen):not(.wrong):hover {
+  outline: none;
+  border-color: #4ac0d5;
+  box-shadow: 0 0 10px #4ac0d5;  
+}
+
+.header {
+  color: #4ac0d5;
+  text-shadow: 0 0 8px #4ac0d5;
+}
