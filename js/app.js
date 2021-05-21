@@ -2,12 +2,14 @@
  * Project 4 - OOP Game App
  * app.js */
 
-// Create a new game by instantiating the Game class
-const game = new Game();
+let game;
 
 // Listen for a click on the "Start game" button
 const btn__resetButton = document.getElementById('btn__reset');
 btn__resetButton.addEventListener('click', () => { 
+
+    // Create a new game by instantiating the Game class
+    game = new Game();
     game.startGame();
 });
 

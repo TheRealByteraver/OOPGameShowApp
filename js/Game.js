@@ -22,11 +22,11 @@ class Game {
         // many phrases as you want. The theme this time is Tarantino
         // movie titles :)
         this.phrases = [
-            'Reservoir dogs',
-            'Pulp fiction',
-            'The hateful eight',
-            'Once Upon a Time In Hollywood',
-            'Django Unchained'
+            new Phrase('Reservoir dogs'),
+            new Phrase('Pulp fiction'),
+            new Phrase('The hateful eight'),
+            new Phrase('Once Upon a Time In Hollywood'),
+            new Phrase('Django Unchained')
         ]; 
         // 'activePhrase' holds an instantiated object of the 'Phrase' class.
         this.activePhrase = null;
@@ -58,7 +58,7 @@ class Game {
         }
 
         // choose a new phrase and put it on the screen
-        this.activePhrase = new Phrase(this.getRandomPhrase()); 
+        this.activePhrase = this.getRandomPhrase();
         this.activePhrase.addPhraseToDisplay();
 
         // remove the overlay with the "Start Game" button
