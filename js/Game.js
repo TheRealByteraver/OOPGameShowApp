@@ -136,7 +136,7 @@ class Game {
     // This method checks to see if the player has revealed all of the 
     // letters in the phrase that the player needs to guess.
     checkForWin() {
-        const lis = document.getElementById('phrase').firstElementChild.children;
+        const lis = document.getElementById('phrase').querySelectorAll('li');
         for(let i = 0; i < lis.length; i++) {
             if(lis[i].classList.contains('hide')) {
                 return false;

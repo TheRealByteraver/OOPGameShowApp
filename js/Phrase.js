@@ -30,7 +30,7 @@ class Phrase {
     // Reveal the letter(s) on the board that matches the player's selection
     showMatchedLetter(letter) {
         const ul = document.getElementById('phrase').firstElementChild;
-        const lis = ul.children;
+        const lis = ul.querySelectorAll('li');
         for(let i = 0; i < lis.length; i++) {
             const li = lis[i];
             if(li.classList.contains(letter)) {
