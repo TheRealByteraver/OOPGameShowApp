@@ -11,13 +11,14 @@ class Phrase {
     // letter. 
     addPhraseToDisplay() {
         const ul = document.getElementById('phrase').firstElementChild;
-        let lis = '';
+        let lis = '<span style="display:inline-block">';
         for(let i = 0; i < this.phrase.length; i++) {
             const letter = this.phrase[i];
             lis += (letter === ' ') ?
-                `<li class="space"> </li>` :
+                `<li class="space"> </li></span><span style="display:inline-block">` :
                 `<li class="hide letter ${letter}">${letter}</li>`;  
         };
+        lis += '</span>';
         ul.innerHTML = lis;
     }
 

@@ -154,7 +154,7 @@ class Game {
         const gameOverMessageH1 = document.getElementById('game-over-message');
 
         overlayDiv.className = '';
-        console.log('overlay classlist: ', overlayDiv.classList);
+        // console.log('overlay classlist: ', overlayDiv.classList);
         const playerHasWon = this.missed < this.maxLives;
         if(playerHasWon) {
             gameOverMessageH1.innerText = 'You won the game!';

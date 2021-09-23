@@ -29,7 +29,7 @@ window.addEventListener('keyup', (event) => {
     } 
     // start the game if the user pressed space or enter
     else {
-        console.log(event.code);
+        // console.log(event.code);
         if( event.code === 'Enter' || 
             event.code === 'Space' || 
             event.code === 'NumpadEnter') {
